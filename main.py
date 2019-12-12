@@ -161,32 +161,6 @@ try:
             pyautogui.click(button='left', clicks=1)
           last_time = current_time
 
-        # if not accel_start: accel_start = accel
-        # accel_buf.append( list(map(operator.sub, accel, accel_start)) )
-
-
-        # if accel_buf.length() >= buf_siz:
-        #   vel = tuple(map(lambda x: int( x[0]-sum(x[1:]) ), list(zip(*accel_buf.values))))
-        #   if not vel_start: vel_start = vel
-        #   vel_buf.append( list(map(operator.sub, vel, vel_start)) )
-        #   # print(list(map(operator.sub, vel, vel_start))[1])
-
-        #   test = tuple(map(operator.sub, vel, vel_start))
-        #   test = tuple(map(lambda x: x//50, test))
-        #   pyautogui.move(test[2], test[1]) 
-        #   print(test)
-
-
-          # print(vel_buf.values)
-        
-        # pos_delta = tuple(map(lambda x: int( x[0]-sum(x[1:]) ), list(zip(*vel_buf.values))))
-        # pos = tuple(map(operator.add, pos, pos_delta))
-
-        # print( pos )
-
-        # test_list = list(zip(*accel_buf.values))
-        # test_dim = test_list[1]
-        # print( int( test_dim[0]-sum(test_dim[1:]) ) )
       except ValueError:
         continue
 except KeyboardInterrupt:
