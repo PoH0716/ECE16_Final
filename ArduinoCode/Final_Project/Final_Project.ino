@@ -16,6 +16,10 @@ unsigned long sendTimer = 0;
 const int buttonPin = 3;
 bool asleep = false;
 volatile bool buttonPressed = false;
+const int button1Pin = 11;
+const int button2Pin = 12;
+int b1 = 0;
+int b2 = 0;
 
 // IMU data variables
 int16_t ax, ay, az, gx, gy, gz;
@@ -162,15 +166,21 @@ bool getData() {
   return newData;
 }
 
-void readAxis() {
+void readMotion() {
   Aax = abs(ax);
   Aay = abs(ay);
   Aaz = abs(az);
 }
 
+void readClick() {
+  b1 = digitalRead(button1Pin);
+  b2 = digitalRead(button2Pin);
+}
+
 void sendData() {
-  readAxis();
-  sprintf(Data, "%5ld,%5ld,%5ld;", Aax, Aay, Aaz);
+  readMotion();
+  readClick();
+  sprintf(Data, "%5ld,%5ld,%5ld,%1d,%1d;", Aax, Aay, Aaz, b1, b2);
   Serial.print(Data);
   hm10.print(Data);
 }
@@ -179,9 +189,10 @@ void sendData() {
 // Setup: executed once at startup or reset
 // --------------------------------------------------------------------------------
 void setup() {
-  pinMode(buttonPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(buttonPin), buttonISR, FALLING);
-
+  // pinMode(buttonPin, INPUT_PULLUP);
+  // attachInterrupt(digitalPinToInterrupt(buttonPin), buttonISR, FALLING);
+  pinMode(button1Pin, INPUT);
+  pinMode(button2Pin, INPUT);
   initIMU();
   Serial.begin(9600);
   hm10.begin(9600);
@@ -195,7 +206,7 @@ void setup() {
 // Loop: main code; executed in an infinite loop
 // --------------------------------------------------------------------------------
 void loop() {
-  toggleSleep();
+  // toggleSleep();
   
   if (hm10.available()) {
     if (readBLE()) {

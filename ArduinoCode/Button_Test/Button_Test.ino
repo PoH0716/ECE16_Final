@@ -1,6 +1,5 @@
 const int button1Pin = 11;
 const int button2Pin = 12;
-
 int button1State = 0;
 int button2State = 0;
 
@@ -13,8 +12,6 @@ void setup() {
 void loop() {
   button1State = digitalRead(button1Pin);
   button2State = digitalRead(button2Pin);
-  //Serial.println(button1State);
-  //Serial.println(button2State);
 
   if (button1State == HIGH) {
     Serial.println("button 1 pressed");
