@@ -161,7 +161,11 @@ try:
             pyautogui.click(button='left', clicks=1)
           last_time = current_time
 
-      except ValueError:
+      # except ValueError:
+      #   continue
+      # except pyautogui.FailSafeException:
+      #   continue
+      except:
         continue
 except KeyboardInterrupt:
     print("\nExiting due to user input (<ctrl>+c).")
